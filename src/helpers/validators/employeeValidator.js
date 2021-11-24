@@ -6,6 +6,7 @@ import BaseValidator from "./baseValidator.js";
 export default class EmployeeValidator extends BaseValidator {
 
     constructor(){
+        super()
         this.errorService=new ErrorService()
     }
 

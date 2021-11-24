@@ -12,6 +12,7 @@ export default class UserService {
         this.employeeService = new EmployeeService();
         this.baseValidator = new BaseValidator();
         this.errorService = new ErrorService();
+        
     }
 
     load(){
@@ -20,13 +21,13 @@ export default class UserService {
 
        this.errors.push(new DataError("Wrong user type",...users.filter(e=>e.type!=="customer" && e.type!=="employee")));
 
-       cstr.map(c=> (this.customerService.checkCustomerValidity(c) && this.baseValidator.isNumberNan(c)) == false ? this.customers.push(c) : console.log("Doğrulama Başarısız"))
-       empl.map(e=> (this.checkEmployeeValidityForErrors(e) || this.baseValidator.isNumberNan(e)) == false ? this.employees.push(e) : console.log("Doğrulama Başarısız")) 
+       cstr.map(c=> (this.customerService.customerValidator.checkCustomerValidity,(c) && this.baseValidator.isNumberNan(c)) == false ? this.customers.push(c) : console.log("Doğrulama Başarısız"))
+       empl.map(e=> (this.employeeService.employeeValidator.checkEmployeeValidityForErrors(e) || this.baseValidator.isNumberNan(e)) == false ? this.employees.push(e) : console.log("Doğrulama Başarısız")) 
     }
 
     add(user){
-        user.type === "customer" ? this.checkCustomerValidity(user) == false ? (this.customerService.customers.push(user), this.loggerService.log(user)) : null : null
-        user.type === "employee" ? this.checkEmployeeValidityForErrors(user) == false ? (this.employeeService.employees.push(user),this.loggerService.log(user)) : null : null
+        user.type === "customer" ? this.customerService.customerValidator.checkCustomerValidity(user) == false ? (this.customerService.customers.push(user), this.loggerService.log(user)) : null : null
+        user.type === "employee" ? this.employeeService.employeeValidator.checkEmployeeValidityForErrors(user) == false ? (this.employeeService.employees.push(user),this.loggerService.log(user)) : null : null
     }
 
 }
