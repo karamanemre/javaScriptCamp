@@ -4,15 +4,13 @@ import UserService from "./userService.js";
 export default class EmployeeService {
 
     constructor(){
+        this.employees=[]
         this.userService = new UserService()
     }
     
     employeeList(){
-        return this.userService.employees
+        return this.employees
     }
 
-    getByEmployeeId(id){
-        return this.userService.employees.find(u=>u.id == id)
-    } 
 
 }
